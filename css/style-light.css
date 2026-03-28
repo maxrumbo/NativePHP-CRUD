@@ -3875,3 +3875,195 @@ section:nth-of-type(even) {
         min-width: 40px;
     }
 }
+
+/* ===== Light Mode Color Harmonization (Cream) ===== */
+.topbar-left i.fas.fa-sun {
+    color: #c6902d !important;
+}
+
+.topbar-left i.fas.fa-moon {
+    color: #9c7b4a !important;
+}
+
+.topbar-nav a {
+    color: #4a3d2d;
+}
+
+.topbar-nav a:hover,
+.topbar-nav a:focus {
+    color: #9b6f2f;
+}
+
+.topbar-nav a::after {
+    background: linear-gradient(90deg, #c89b56, #9b6f2f);
+}
+
+.hero-3d .tech-icon {
+    color: rgba(140, 108, 63, 0.55);
+    text-shadow: 0 0 12px rgba(186, 146, 88, 0.35);
+}
+
+.role-3d {
+    color: #8f6a3a;
+}
+
+.department {
+    color: #768745;
+}
+
+.hologram-effect {
+    border-color: rgba(175, 137, 82, 0.22);
+    background: linear-gradient(45deg, transparent 30%, rgba(195, 157, 102, 0.28) 50%, transparent 70%);
+}
+
+.actions-3d .btn-front {
+    color: #352a1e;
+    box-shadow: 0 8px 20px rgba(120, 90, 52, 0.18);
+}
+
+.actions-3d .btn-back {
+    color: #352a1e;
+}
+
+.quick-actions .action-btn {
+    background: #f8efdf;
+    border-color: #b79767;
+    color: #3f3326;
+    box-shadow: 0 4px 12px rgba(127, 95, 55, 0.16);
+}
+
+.quick-actions .action-btn:first-child,
+.quick-actions .action-btn:last-child {
+    border-color: #b79767;
+}
+
+.quick-actions .action-btn:hover {
+    background: #f2e3cb;
+    border-color: #9f7a45;
+    color: #2f261d;
+}
+
+.footer-code {
+    background: rgba(247, 236, 217, 0.9);
+    border: 1px solid rgba(175, 137, 82, 0.25);
+}
+
+.footer-code .code-line {
+    color: #8f6f41;
+}
+
+.footer-code .output-line {
+    color: #6b9e6e;
+}
+
+.footer-admin .admin-link {
+    border-color: rgba(175, 137, 82, 0.55);
+    color: #8f6f41;
+}
+
+/* ===== Full Cream Remap (No White Base) ===== */
+.about,
+.projects,
+.certificates,
+.skills,
+.contact {
+    background: #f7efdf !important;
+}
+
+.about .code-editor,
+.editor-content,
+.tab.active,
+.tab:hover,
+.stat-item,
+.skill-item,
+.project-card,
+.timeline-content,
+.certificate-card,
+.app-link,
+.contact-form,
+.footer-code,
+.contact-form .btn,
+.project-tech span,
+.timeline-skills span {
+    background: #f8efdf !important;
+}
+
+.editor-header,
+.code-stats,
+.form-group input,
+.form-group textarea,
+.tab,
+.project-tech span,
+.timeline-date,
+.timeline-skills span {
+    background: #f1e4cf !important;
+}
+
+.about .code-editor,
+.stat-item,
+.skill-item,
+.project-card,
+.timeline-content,
+.certificate-card,
+.app-link,
+.contact-form,
+.footer-code {
+    border-color: rgba(162, 127, 80, 0.28) !important;
+    box-shadow: 0 10px 26px rgba(119, 88, 49, 0.14) !important;
+}
+
+.footer-code::after {
+    border-top-color: #f8efdf !important;
+}
+
+.about .section-title,
+.skill-item h3,
+.project-content h3,
+.timeline-content h3,
+.timeline-content h4,
+.contact-apps h3,
+.section-title,
+.topbar-nav a,
+.app-link span,
+.project-content p,
+.timeline-content p,
+.stat-info p,
+.code-line,
+.output-line,
+.employee-id,
+.validity-info {
+    color: #4b3b2a !important;
+}
+
+.line-numbers,
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9a8261 !important;
+}
+
+.stat-icon,
+.project-image,
+.contact-form .btn {
+    color: #3a2c1d !important;
+}
+
+.project-tech span,
+.timeline-skills span,
+.timeline-date {
+    color: #73562f !important;
+    border-color: rgba(156, 118, 68, 0.35) !important;
+}
+
+.contact-form .btn {
+    background: linear-gradient(45deg, #d7b17c, #c79658) !important;
+    box-shadow: 0 8px 20px rgba(151, 108, 56, 0.28) !important;
+}
+
+.contact-form .btn:hover {
+    background: linear-gradient(45deg, #c79658, #d7b17c) !important;
+}
+
+.contact-form .btn::before,
+.action-btn::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 244, 229, 0.35), transparent) !important;
+}
