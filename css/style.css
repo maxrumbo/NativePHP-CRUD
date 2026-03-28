@@ -1,4 +1,4 @@
-/* Topbar icon color for dark mode */
+﻿/* Topbar icon color for dark mode */
 .topbar-left i.fas.fa-moon {
     color: #7dcfff !important; /* biru untuk dark mode */
     transition: color 0.3s;
@@ -13,6 +13,7 @@
     top: 0;
     width: 100%;
     background: rgba(26, 27, 38, 0.95);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1001;
     border-bottom: 1px solid rgba(187, 154, 247, 0.08);
@@ -262,6 +263,7 @@ section:nth-of-type(even) {
     top: 0;
     width: 100%;
     background: rgba(26, 27, 38, 0.95); /* Dark background */
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 1rem 0;
@@ -518,6 +520,7 @@ section:nth-of-type(even) {
     position: absolute;
     border-radius: 50%;
     background: linear-gradient(45deg, rgba(125, 207, 255, 0.15), rgba(187, 154, 247, 0.15));
+        -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     animation: float 15s ease-in-out infinite;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -902,6 +905,7 @@ section:nth-of-type(even) {
     align-items: center;
     gap: 0.5rem;
     background: rgba(125, 207, 255, 0.1);
+        -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(125, 207, 255, 0.2);
     border-radius: 25px;
@@ -974,6 +978,7 @@ section:nth-of-type(even) {
     overflow: hidden;
     border: 2px solid transparent;
     background: linear-gradient(45deg, rgba(125, 207, 255, 0.1), rgba(187, 154, 247, 0.1));
+        -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
@@ -1068,6 +1073,7 @@ section:nth-of-type(even) {
     animation: bounce 2s infinite, arrowGlow 3s ease-in-out infinite;
     color: #7dcfff;
     background: rgba(125, 207, 255, 0.05);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     position: relative;
     transition: all 0.3s ease;
@@ -1252,6 +1258,7 @@ section:nth-of-type(even) {
     padding: 0 20px;
     color: #565f89;
     text-align: right;
+        -webkit-user-select: none;
     user-select: none;
     border-right: 1px solid rgba(187, 154, 247, 0.1);
     min-width: 60px;
@@ -1609,6 +1616,7 @@ section {
     padding: 0.5rem 1rem;
     border-radius: 25px;
     border: 1px solid rgba(125, 207, 255, 0.3);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     z-index: 3;
     position: relative;
@@ -2057,6 +2065,7 @@ section {
     border: 1px solid rgba(187, 154, 247, 0.2);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     position: relative;
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
@@ -2152,6 +2161,7 @@ section {
     color: #bb9af7;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -2179,6 +2189,7 @@ section {
     color: #7dcfff;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -2670,6 +2681,7 @@ section {
     height: 60px;
     background: rgba(125, 207, 255, 0.1);
     border: 1px solid rgba(125, 207, 255, 0.3);
+        -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -2898,6 +2910,7 @@ section {
     backface-visibility: hidden;
     border-radius: 16px;
     background: linear-gradient(135deg, rgba(26, 27, 38, 0.98), rgba(36, 40, 59, 0.98));
+        -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border: 2px solid rgba(125, 207, 255, 0.3);
     padding: 2.5rem;
@@ -3142,7 +3155,7 @@ section {
     font-size: clamp(1.3rem, 3vw, 1.6rem);
     color: rgba(125, 207, 255, 0.9);
     margin-bottom: 0.7rem;
-    min-height: auto;
+    min-height: 0;
     font-weight: 500;
     position: relative;
 }
@@ -3701,4 +3714,101 @@ section {
     .ring-1 { width: 140px; height: 140px; }
     .ring-2 { width: 160px; height: 160px; }
     .ring-3 { width: 180px; height: 180px; }
+}
+
+/* ===== Final Hero Layout Consistency (Dark) ===== */
+.hero-3d {
+    justify-content: center;
+}
+
+.hero-3d-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-inline: auto;
+}
+
+.profile-3d-card {
+    margin: 0 auto;
+}
+
+.actions-3d {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 1.25rem auto 0.8rem;
+}
+
+.quick-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.quick-actions .action-btn {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .actions-3d,
+    .quick-actions {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+}
+
+/* ===== Precision Center Fix (Dark) ===== */
+.topbar .topbar-content,
+.topbar .topbar-content-layout {
+    display: grid !important;
+    grid-template-columns: 56px minmax(0, 1fr) 56px;
+    align-items: center;
+}
+
+.topbar .topbar-left,
+.topbar .topbar-left-slot,
+.topbar .topbar-right,
+.topbar .topbar-right-slot {
+    width: 56px;
+    min-width: 56px;
+    justify-self: center;
+}
+
+.topbar .topbar-nav,
+.topbar .topbar-nav-layout {
+    justify-self: center;
+    justify-content: center !important;
+}
+
+.hero-3d-container {
+    width: min(1200px, 100%);
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-items: center !important;
+}
+
+.profile-3d-card,
+.actions-3d,
+.quick-actions {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 600px) {
+    .topbar .topbar-content,
+    .topbar .topbar-content-layout {
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+    }
+
+    .topbar .topbar-left,
+    .topbar .topbar-left-slot,
+    .topbar .topbar-right,
+    .topbar .topbar-right-slot {
+        width: 40px;
+        min-width: 40px;
+    }
 }

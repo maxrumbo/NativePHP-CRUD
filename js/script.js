@@ -126,21 +126,30 @@ function initProgressBars() {
 }
 
 // Mobile Navigation Toggle
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        if (hamburger) {
+            hamburger.classList.remove('active');
+        }
+        if (navMenu) {
+            navMenu.classList.remove('active');
+        }
     });
 });
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
+    if (!navbar) {
+        return;
+    }
     if (window.scrollY > 100) {
         navbar.classList.add('scrolled');
     } else {
@@ -202,31 +211,33 @@ function animateProgressBars() {
 }
 
 // Contact form handling
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject');
-    const message = formData.get('message');
-    
-    // Simple validation
-    if (!name || !email || !subject || !message) {
-        showNotification('Mohon lengkapi semua field!', 'error');
-        return;
-    }
-    
-    if (!isValidEmail(email)) {
-        showNotification('Format email tidak valid!', 'error');
-        return;
-    }
-    
-    // Simulate form submission
-    showNotification('Pesan berhasil dikirim! Terima kasih.', 'success');
-    contactForm.reset();
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const subject = formData.get('subject');
+        const message = formData.get('message');
+        
+        // Simple validation
+        if (!name || !email || !subject || !message) {
+            showNotification('Mohon lengkapi semua field!', 'error');
+            return;
+        }
+        
+        if (!isValidEmail(email)) {
+            showNotification('Format email tidak valid!', 'error');
+            return;
+        }
+        
+        // Simulate form submission
+        showNotification('Pesan berhasil dikirim! Terima kasih.', 'success');
+        contactForm.reset();
+    });
+}
 
 // Email validation
 function isValidEmail(email) {

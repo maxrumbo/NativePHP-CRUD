@@ -10,15 +10,256 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .topbar-content-layout {
+            display: flex;
+            align-items: center;
+            height: 64px;
+        }
+        .topbar-left-slot {
+            flex: 0 0 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .topbar-theme-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .topbar-nav-layout {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+        .topbar-right-slot {
+            flex: 0 0 56px;
+        }
+        .admin-link-cursor {
+            cursor: pointer;
+        }
+        .edit-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            padding: 20px;
+        }
+        .edit-overlay-panel {
+            background: rgba(36, 40, 59, 0.95);
+            border-radius: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(125, 207, 255, 0.3);
+        }
+        .edit-overlay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .edit-overlay-title {
+            color: #c0caf5;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .edit-overlay-close {
+            background: rgba(255, 92, 87, 0.2);
+            border: 1px solid rgba(255, 92, 87, 0.5);
+            color: #ff5c57;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .edit-tabs-wrap {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .edit-tab-primary {
+            background: rgba(125, 207, 255, 0.2);
+            color: #7dcfff;
+            border: 1px solid rgba(125, 207, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .edit-tab-secondary {
+            background: rgba(36, 40, 59, 0.8);
+            color: #a9b1d6;
+            border: 1px solid rgba(125, 207, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .edit-overlay-actions {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .edit-overlay-save {
+            background: linear-gradient(135deg, #9ece6a, #73daca);
+            color: #1a1b26;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .edit-overlay-preview {
+            background: rgba(125, 207, 255, 0.2);
+            color: #7dcfff;
+            border: 1px solid rgba(125, 207, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .edit-overlay-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(158, 206, 106, 0.2);
+            border: 1px solid rgba(158, 206, 106, 0.5);
+            color: #9ece6a;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .editor-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .editor-grid-2.mt-20 {
+            margin-top: 20px;
+        }
+        .editor-label {
+            display: block;
+            color: #c0caf5;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .editor-label-sm {
+            display: block;
+            color: #a9b1d6;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        .editor-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(36, 40, 59, 0.8);
+            border: 1px solid rgba(125, 207, 255, 0.3);
+            border-radius: 6px;
+            color: #c0caf5;
+            box-sizing: border-box;
+        }
+        .editor-input-sm {
+            width: 100%;
+            padding: 10px;
+            background: rgba(36, 40, 59, 0.8);
+            border: 1px solid rgba(125, 207, 255, 0.3);
+            border-radius: 6px;
+            color: #c0caf5;
+            box-sizing: border-box;
+        }
+        .editor-textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(36, 40, 59, 0.8);
+            border: 1px solid rgba(125, 207, 255, 0.3);
+            border-radius: 6px;
+            color: #c0caf5;
+            box-sizing: border-box;
+        }
+        .editor-textarea-code {
+            font-family: 'Fira Code', monospace;
+        }
+        .editor-subtitle {
+            color: #c0caf5;
+            margin-bottom: 15px;
+        }
+        .editor-panel {
+            padding: 20px;
+            background: rgba(26, 27, 38, 0.5);
+            border-radius: 8px;
+        }
+        .editor-quick-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto auto;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(26, 27, 38, 0.5);
+            border-radius: 8px;
+        }
+        .editor-grid-title-icon {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .editor-grid-tech-action {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+        }
+        .editor-width-80 {
+            width: 80px;
+        }
+        .editor-width-150 {
+            width: 150px;
+        }
+        .editor-pt-20 {
+            padding-top: 20px;
+        }
+        .editor-mb-15 {
+            margin-bottom: 15px;
+        }
+        .editor-info {
+            color: #a9b1d6;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .editor-info.mt-15 {
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+        .editor-btn {
+            color: #1a1b26;
+            background: linear-gradient(135deg, #9ece6a, #73daca);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .editor-btn-sm {
+            padding: 10px 15px;
+        }
+        .editor-btn-md {
+            padding: 10px 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Topbar -->
     <div class="topbar">
-        <div class="container topbar-content" style="display: flex; align-items: center; height: 64px;">
-            <div class="topbar-left" style="flex:0 0 56px; display:flex; align-items:center; justify-content:center;">
-                <i id="theme-toggle" class="fas fa-moon" style="font-size: 1.2rem; cursor: pointer;"></i>
+        <div class="container topbar-content topbar-content-layout">
+            <div class="topbar-left topbar-left-slot">
+                <i id="theme-toggle" class="fas fa-moon topbar-theme-icon"></i>
             </div>
-            <nav class="topbar-nav" style="flex:1 1 0; display: flex; align-items: center; justify-content: center; gap: 24px;">
+            <nav class="topbar-nav topbar-nav-layout">
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
@@ -27,7 +268,7 @@
                 <a href="#contact">Contact</a>
                 <a href="assets/cv/Maxwell_Rumahorbo_CV.pdf" target="_blank">CV</a>
             </nav>
-            <div class="topbar-right" style="flex:0 0 56px;"></div>
+            <div class="topbar-right topbar-right-slot"></div>
         </div>
     </div>
     <script>
@@ -88,7 +329,7 @@
         switch(section) {
             case 'hero':
                 editContent.innerHTML = `
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="editor-grid-2">
                         <div>
                         </div>
                     </div>
@@ -303,7 +544,6 @@
         }
     });
     </script>
-</body>
             <div class="tech-particles">
                 <div class="tech-icon tech-1" data-tech="html">
                     <i class="fab fa-html5"></i>
@@ -525,7 +765,7 @@
                     <i class="fas fa-download"></i>
                     Download CV
                 </a>
-                <a href="https://maxrumbo.github.io/live-portfolio" class="action-btn portfolio-btn" target="_blank">
+                <a href="https://maxrumbo.github.io/live-portfolio" class="action-btn portfolio-btn" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-external-link-alt"></i>
                     Live Portfolio
                 </a>
@@ -1057,7 +1297,7 @@
                     <div class="contact-apps">
                         <h3>Connect with me</h3>
                         <div class="app-links">
-                            <a href="https://wa.me/6282183096287" class="app-link" data-app="whatsapp" target="_blank">
+                            <a href="https://wa.me/6282183096287" class="app-link" data-app="whatsapp" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-whatsapp"></i>
                                 <span>WhatsApp</span>
                             </a>
@@ -1065,19 +1305,19 @@
                                 <i class="fas fa-envelope"></i>
                                 <span>Email</span>
                             </a>
-                            <a href="https://github.com/maxrumbo" class="app-link" data-app="github" target="_blank">
+                            <a href="https://github.com/maxrumbo" class="app-link" data-app="github" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-github"></i>
                                 <span>GitHub</span>
                             </a>
-                            <a href="https://stackoverflow.com/users/27343136/maxwell-rumahorbo" class="app-link" data-app="stackoverflow" target="_blank">
+                            <a href="https://stackoverflow.com/users/27343136/maxwell-rumahorbo" class="app-link" data-app="stackoverflow" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-stack-overflow"></i>
                                 <span>Stack Overflow</span>
                             </a>
-                            <a href="https://codepen.io/maxrumbo" class="app-link" data-app="codepen" target="_blank">
+                            <a href="https://codepen.io/maxrumbo" class="app-link" data-app="codepen" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-codepen"></i>
                                 <span>Codepen</span>
                             </a>
-                            <a href="https://instagram.com/maxwellrumbo_" class="app-link" data-app="instagram" target="_blank">
+                            <a href="https://instagram.com/maxwellrumbo_" class="app-link" data-app="instagram" target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-instagram"></i>
                                 <span>Instagram</span>
                             </a>
@@ -1113,7 +1353,7 @@
                 <span class="output-line">© maxrumbo. Made with Pride!</span>
             </div>
             <div class="footer-admin">
-                <div class="admin-link" onclick="navigateToAdmin()" style="cursor:pointer;">
+                <div class="admin-link admin-link-cursor" onclick="navigateToAdmin()">
                     <i class="fas fa-cog"></i>
                 </div>
             </div>
@@ -1121,32 +1361,32 @@
     </footer>
 
     <!-- Edit Mode Overlay -->
-    <div id="edit-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 10000; padding: 20px;">
-        <div style="background: rgba(36, 40, 59, 0.95); border-radius: 15px; max-width: 900px; margin: 0 auto; padding: 30px; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(125, 207, 255, 0.3);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="color: #c0caf5; margin: 0; font-size: 1.5rem;">
+    <div id="edit-overlay" class="edit-overlay">
+        <div class="edit-overlay-panel">
+            <div class="edit-overlay-header">
+                <h3 class="edit-overlay-title">
                     <i class="fas fa-edit"></i> Live Portfolio Editor
                 </h3>
-                <button onclick="closeEditMode()" style="background: rgba(255, 92, 87, 0.2); border: 1px solid rgba(255, 92, 87, 0.5); color: #ff5c57; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+                <button onclick="closeEditMode()" class="edit-overlay-close">
                     <i class="fas fa-times"></i> Close
                 </button>
             </div>
             
             <!-- Section Tabs -->
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                <button onclick="showEditSection('hero')" class="edit-tab active" data-section="hero" style="background: rgba(125, 207, 255, 0.2); color: #7dcfff; border: 1px solid rgba(125, 207, 255, 0.3); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+            <div class="edit-tabs-wrap">
+                <button onclick="showEditSection('hero')" class="edit-tab active edit-tab-primary" data-section="hero">
                     <i class="fas fa-home"></i> Hero
                 </button>
-                <button onclick="showEditSection('about')" class="edit-tab" data-section="about" style="background: rgba(36, 40, 59, 0.8); color: #a9b1d6; border: 1px solid rgba(125, 207, 255, 0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                <button onclick="showEditSection('about')" class="edit-tab edit-tab-secondary" data-section="about">
                     <i class="fas fa-user"></i> About
                 </button>
-                <button onclick="showEditSection('skills')" class="edit-tab" data-section="skills" style="background: rgba(36, 40, 59, 0.8); color: #a9b1d6; border: 1px solid rgba(125, 207, 255, 0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                <button onclick="showEditSection('skills')" class="edit-tab edit-tab-secondary" data-section="skills">
                     <i class="fas fa-code"></i> Skills
                 </button>
-                <button onclick="showEditSection('projects')" class="edit-tab" data-section="projects" style="background: rgba(36, 40, 59, 0.8); color: #a9b1d6; border: 1px solid rgba(125, 207, 255, 0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                <button onclick="showEditSection('projects')" class="edit-tab edit-tab-secondary" data-section="projects">
                     <i class="fas fa-briefcase"></i> Projects
                 </button>
-                <button onclick="showEditSection('contact')" class="edit-tab" data-section="contact" style="background: rgba(36, 40, 59, 0.8); color: #a9b1d6; border: 1px solid rgba(125, 207, 255, 0.2); padding: 8px 16px; border-radius: 6px; cursor: pointer;">
+                <button onclick="showEditSection('contact')" class="edit-tab edit-tab-secondary" data-section="contact">
                     <i class="fas fa-envelope"></i> Contact
                 </button>
             </div>
@@ -1155,16 +1395,16 @@
                 <!-- Dynamic edit content will be loaded here -->
             </div>
             
-            <div style="margin-top: 20px; text-align: center; display: flex; gap: 10px; justify-content: center;">
-                <button onclick="savePortfolioChanges()" style="background: linear-gradient(135deg, #9ece6a, #73daca); color: #1a1b26; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            <div class="edit-overlay-actions">
+                <button onclick="savePortfolioChanges()" class="edit-overlay-save">
                     <i class="fas fa-save"></i> Save Changes
                 </button>
-                <button onclick="previewChanges()" style="background: rgba(125, 207, 255, 0.2); color: #7dcfff; border: 1px solid rgba(125, 207, 255, 0.3); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                <button onclick="previewChanges()" class="edit-overlay-preview">
                     <i class="fas fa-eye"></i> Preview
                 </button>
             </div>
             
-            <div id="edit-message" style="display: none; margin-top: 15px; padding: 12px; background: rgba(158, 206, 106, 0.2); border: 1px solid rgba(158, 206, 106, 0.5); color: #9ece6a; border-radius: 8px; text-align: center;">
+            <div id="edit-message" class="edit-overlay-message">
                 Changes saved successfully!
             </div>
         </div>
@@ -1208,30 +1448,30 @@
             switch(section) {
                 case 'hero':
                     editContent.innerHTML = `
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="editor-grid-2">
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Full Name</label>
-                                <input type="text" id="edit-name" value="Maxwell Rumahorbo" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Full Name</label>
+                                <input type="text" id="edit-name" value="Maxwell Rumahorbo" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Professional Role</label>
-                                <input type="text" id="edit-role" value="Information Systems Student" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Professional Role</label>
+                                <input type="text" id="edit-role" value="Information Systems Student" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">University/Company</label>
-                                <input type="text" id="edit-university" value="Institut Teknologi Del" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">University/Company</label>
+                                <input type="text" id="edit-university" value="Institut Teknologi Del" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Employee/Student ID</label>
-                                <input type="text" id="edit-id" value="2024.DEV.001" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Employee/Student ID</label>
+                                <input type="text" id="edit-id" value="2024.DEV.001" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Department</label>
-                                <input type="text" id="edit-department" value="Information Technology" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Department</label>
+                                <input type="text" id="edit-department" value="Information Technology" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Graduation Year</label>
-                                <input type="number" id="edit-year" value="2024" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Graduation Year</label>
+                                <input type="number" id="edit-year" value="2024" class="editor-input">
                             </div>
                         </div>
                     `;
@@ -1240,17 +1480,17 @@
                 case 'about':
                     editContent.innerHTML = `
                         <div>
-                            <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">About Description</label>
-                            <textarea id="edit-about-desc" rows="4" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box; font-family: 'Fira Code', monospace;">Passionate Information Systems student at Institut Teknologi Del with a strong foundation in web development and software engineering. I enjoy creating innovative solutions and learning new technologies to build the future, one line of code at a time.</textarea>
+                            <label class="editor-label">About Description</label>
+                            <textarea id="edit-about-desc" rows="4" class="editor-textarea editor-textarea-code">Passionate Information Systems student at Institut Teknologi Del with a strong foundation in web development and software engineering. I enjoy creating innovative solutions and learning new technologies to build the future, one line of code at a time.</textarea>
                             
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                            <div class="editor-grid-2 mt-20">
                                 <div>
-                                    <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Your Passion</label>
-                                    <textarea id="edit-passion" rows="3" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">Creating innovative web solutions and learning new technologies every day</textarea>
+                                    <label class="editor-label">Your Passion</label>
+                                    <textarea id="edit-passion" rows="3" class="editor-textarea">Creating innovative web solutions and learning new technologies every day</textarea>
                                 </div>
                                 <div>
-                                    <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Career Goal</label>
-                                    <textarea id="edit-goal" rows="3" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">Building the future, one line of code at a time</textarea>
+                                    <label class="editor-label">Career Goal</label>
+                                    <textarea id="edit-goal" rows="3" class="editor-textarea">Building the future, one line of code at a time</textarea>
                                 </div>
                             </div>
                         </div>
@@ -1260,28 +1500,28 @@
                 case 'skills':
                     editContent.innerHTML = `
                         <div>
-                            <h4 style="color: #c0caf5; margin-bottom: 15px;">Quick Add Skill</h4>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 10px; margin-bottom: 20px; padding: 15px; background: rgba(26, 27, 38, 0.5); border-radius: 8px;">
+                            <h4 class="editor-subtitle">Quick Add Skill</h4>
+                            <div class="editor-quick-grid">
                                 <div>
-                                    <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Skill Name</label>
-                                    <input type="text" id="new-skill-name" placeholder="e.g., Python" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                    <label class="editor-label-sm">Skill Name</label>
+                                    <input type="text" id="new-skill-name" placeholder="e.g., Python" class="editor-input-sm">
                                 </div>
                                 <div>
-                                    <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Icon Class</label>
-                                    <input type="text" id="new-skill-icon" placeholder="fab fa-python" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                    <label class="editor-label-sm">Icon Class</label>
+                                    <input type="text" id="new-skill-icon" placeholder="fab fa-python" class="editor-input-sm">
                                 </div>
-                                <div style="width: 80px;">
-                                    <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Level %</label>
-                                    <input type="number" id="new-skill-level" value="80" min="0" max="100" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <div class="editor-width-80">
+                                    <label class="editor-label-sm">Level %</label>
+                                    <input type="number" id="new-skill-level" value="80" min="0" max="100" class="editor-input-sm">
                                 </div>
-                                <div style="padding-top: 20px;">
-                                    <button onclick="addNewSkill()" style="background: linear-gradient(135deg, #9ece6a, #73daca); color: #1a1b26; padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                <div class="editor-pt-20">
+                                    <button onclick="addNewSkill()" class="editor-btn editor-btn-sm">
                                         <i class="fas fa-plus"></i> Add
                                     </button>
                                 </div>
                             </div>
                             
-                            <div style="color: #a9b1d6; font-size: 0.9rem; margin-bottom: 10px;">
+                            <div class="editor-info">
                                 <i class="fas fa-info-circle"></i> Current skills: HTML5, CSS3, JavaScript, React, Bootstrap, Git
                             </div>
                         </div>
@@ -1291,38 +1531,38 @@
                 case 'projects':
                     editContent.innerHTML = `
                         <div>
-                            <h4 style="color: #c0caf5; margin-bottom: 15px;">Add New Project</h4>
-                            <div style="padding: 20px; background: rgba(26, 27, 38, 0.5); border-radius: 8px;">
-                                <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; margin-bottom: 15px;">
+                            <h4 class="editor-subtitle">Add New Project</h4>
+                            <div class="editor-panel">
+                                <div class="editor-grid-title-icon">
                                     <div>
-                                        <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Project Title</label>
-                                        <input type="text" id="new-project-title" placeholder="My Awesome Project" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                        <label class="editor-label-sm">Project Title</label>
+                                        <input type="text" id="new-project-title" placeholder="My Awesome Project" class="editor-input-sm">
                                     </div>
-                                    <div style="width: 150px;">
-                                        <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Icon Class</label>
-                                        <input type="text" id="new-project-icon" placeholder="fas fa-code" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                    <div class="editor-width-150">
+                                        <label class="editor-label-sm">Icon Class</label>
+                                        <input type="text" id="new-project-icon" placeholder="fas fa-code" class="editor-input-sm">
                                     </div>
                                 </div>
                                 
-                                <div style="margin-bottom: 15px;">
-                                    <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Description</label>
-                                    <textarea id="new-project-desc" rows="3" placeholder="Describe your project..." style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;"></textarea>
+                                <div class="editor-mb-15">
+                                    <label class="editor-label-sm">Description</label>
+                                    <textarea id="new-project-desc" rows="3" placeholder="Describe your project..." class="editor-input-sm"></textarea>
                                 </div>
                                 
-                                <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px;">
+                                <div class="editor-grid-tech-action">
                                     <div>
-                                        <label style="display: block; color: #a9b1d6; font-size: 0.8rem; margin-bottom: 5px;">Technologies (comma-separated)</label>
-                                        <input type="text" id="new-project-tech" placeholder="HTML, CSS, JavaScript, React" style="width: 100%; padding: 10px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                        <label class="editor-label-sm">Technologies (comma-separated)</label>
+                                        <input type="text" id="new-project-tech" placeholder="HTML, CSS, JavaScript, React" class="editor-input-sm">
                                     </div>
-                                    <div style="padding-top: 20px;">
-                                        <button onclick="addNewProject()" style="background: linear-gradient(135deg, #9ece6a, #73daca); color: #1a1b26; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                                    <div class="editor-pt-20">
+                                        <button onclick="addNewProject()" class="editor-btn editor-btn-md">
                                             <i class="fas fa-plus"></i> Add Project
                                         </button>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div style="color: #a9b1d6; font-size: 0.9rem; margin-top: 15px;">
+                            <div class="editor-info mt-15">
                                 <i class="fas fa-info-circle"></i> Current projects: E-Commerce Website, Blog Platform, Calculator App
                             </div>
                         </div>
@@ -1331,22 +1571,22 @@
                     
                 case 'contact':
                     editContent.innerHTML = `
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="editor-grid-2">
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Email Address</label>
-                                <input type="email" id="edit-email" value="maxrumbo@gmail.com" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Email Address</label>
+                                <input type="email" id="edit-email" value="maxrumbo@gmail.com" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Phone/WhatsApp</label>
-                                <input type="text" id="edit-phone" value="6282183096287" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Phone/WhatsApp</label>
+                                <input type="text" id="edit-phone" value="6282183096287" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">GitHub Username</label>
-                                <input type="text" id="edit-github" value="maxrumbo" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">GitHub Username</label>
+                                <input type="text" id="edit-github" value="maxrumbo" class="editor-input">
                             </div>
                             <div>
-                                <label style="display: block; color: #c0caf5; margin-bottom: 8px; font-weight: 500;">Instagram Handle</label>
-                                <input type="text" id="edit-instagram" value="maxwellrumbo_" style="width: 100%; padding: 12px; background: rgba(36, 40, 59, 0.8); border: 1px solid rgba(125, 207, 255, 0.3); border-radius: 6px; color: #c0caf5; box-sizing: border-box;">
+                                <label class="editor-label">Instagram Handle</label>
+                                <input type="text" id="edit-instagram" value="maxwellrumbo_" class="editor-input">
                             </div>
                         </div>
                     `;
