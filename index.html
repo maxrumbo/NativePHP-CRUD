@@ -273,8 +273,36 @@
     </div>
     <script>
     // Footer admin gear: redirect ke login page
-    function navigateToAdmin() {
-        window.location.href = 'admin/login.php';
+    async function navigateToAdmin() {
+        const isStaticPreview = window.location.protocol === 'file:' || window.location.port === '5500';
+        if (!isStaticPreview) {
+            window.location.href = 'admin/login.php';
+            return;
+        }
+
+        const hosts = ['http://localhost', 'http://127.0.0.1'];
+
+        for (const host of hosts) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1200);
+
+            try {
+                await fetch(`${host}/`, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+                window.location.href = `${host}/web-portofolio/web-portofolio/admin/login.php`;
+                return;
+            } catch (_) {
+                clearTimeout(timeoutId);
+            }
+        }
+
+        alert('Admin membutuhkan server PHP. Jalankan Apache di XAMPP dulu, lalu klik icon gear lagi.');
     }
 
     // Toast notification
@@ -444,8 +472,36 @@
     <!-- CSS di atas sudah dipindahkan ke <style> di <head> atau file eksternal -->
     <script>
     // Footer admin gear: redirect ke login page
-    function navigateToAdmin() {
-        window.location.href = 'admin/login.php';
+    async function navigateToAdmin() {
+        const isStaticPreview = window.location.protocol === 'file:' || window.location.port === '5500';
+        if (!isStaticPreview) {
+            window.location.href = 'admin/login.php';
+            return;
+        }
+
+        const hosts = ['http://localhost', 'http://127.0.0.1'];
+
+        for (const host of hosts) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1200);
+
+            try {
+                await fetch(`${host}/`, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+                window.location.href = `${host}/web-portofolio/web-portofolio/admin/login.php`;
+                return;
+            } catch (_) {
+                clearTimeout(timeoutId);
+            }
+        }
+
+        alert('Admin membutuhkan server PHP. Jalankan Apache di XAMPP dulu, lalu klik icon gear lagi.');
     }
 
     // Dinamis: Load data dari portfolio-data.json via PHP
@@ -1416,8 +1472,36 @@
 
     <script>
     // Footer admin gear: redirect ke login page
-    function navigateToAdmin() {
-        window.location.href = 'admin/login.php';
+    async function navigateToAdmin() {
+        const isStaticPreview = window.location.protocol === 'file:' || window.location.port === '5500';
+        if (!isStaticPreview) {
+            window.location.href = 'admin/login.php';
+            return;
+        }
+
+        const hosts = ['http://localhost', 'http://127.0.0.1'];
+
+        for (const host of hosts) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1200);
+
+            try {
+                await fetch(`${host}/`, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+                window.location.href = `${host}/web-portofolio/web-portofolio/admin/login.php`;
+                return;
+            } catch (_) {
+                clearTimeout(timeoutId);
+            }
+        }
+
+        alert('Admin membutuhkan server PHP. Jalankan Apache di XAMPP dulu, lalu klik icon gear lagi.');
     }
     </script>
     
