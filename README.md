@@ -1,33 +1,33 @@
 # PHP-Native-CRUD Web Portofolio
 
-Proyek ini adalah aplikasi web portofolio berbasis PHP Native dengan fitur CRUD sederhana.
-Tujuan aplikasi ini adalah menampilkan profil, skill, project, experience, sertifikat, dan contact, serta menyediakan halaman admin untuk mengelola isi portofolio.
+This project is a native PHP portfolio web application with simple CRUD features.
+The goal of this application is to display a profile, skills, projects, experience, certificates, and contact information, and to provide an admin page to manage the portfolio content.
 
-## Fitur Utama
-- Halaman portofolio publik (frontend)
-- Tema Dark Mode dan Light Mode
-- Halaman admin untuk edit konten
-- Simpan dan ambil data portofolio (CRUD)
+## Main Features
+- Public portfolio page (frontend)
+- Dark Mode and Light Mode themes
+- Admin page for editing content
+- Save and retrieve portfolio data (CRUD)
 
 ## Struktur
-- index.html: halaman utama portofolio
-- admin/: halaman login, dashboard, dan proses simpan data
-- css/: style dark dan light
-- js/: interaksi frontend
-- assets/: gambar dan CV
+- index.html: main portfolio page
+- admin/: login page, dashboard, and data saving process
+- css/: dark and light styles
+- js/: frontend interactions
+- assets/: images and CV
 
-## Cara Menjalankan
-1. Simpan project di folder htdocs.
-2. Jalankan Apache dari XAMPP.
-3. Buka browser ke:
+## How to Run
+1. Save the project in the htdocs folder.
+2. Start Apache from XAMPP.
+3. Open your browser to:
    - http://localhost/web-portofolio/web-portofolio/
-4. Untuk admin, klik icon gear di halaman utama atau buka:
+4. For admin access, click the gear icon on the main page or open:
    - http://localhost/web-portofolio/web-portofolio/admin/login.php
 
-## Catatan
-- Jika dibuka lewat Live Server (port 5500), file PHP tidak diproses penuh.
-- Untuk fitur admin/CRUD, gunakan Apache/XAMPP.
+## Notes
+- If opened through Live Server (port 5500), PHP files are not fully processed.
+- For admin/CRUD features, use Apache/XAMPP.
 
 ---
 
-Dibuat untuk kebutuhan pembelajaran dan pengembangan aplikasi Web Portofolio berbasis PHP Native.
+Created for learning purposes and the development of a native PHP web portfolio application.
