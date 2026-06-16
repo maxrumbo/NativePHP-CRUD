@@ -1,33 +1,31 @@
-# PHP-Native-CRUD Web Portofolio
+# PHP Native CRUD Web Portfolio
 
-This project is a native PHP portfolio web application with simple CRUD features.
-The goal of this application is to display a profile, skills, projects, experience, certificates, and contact information, and to provide an admin page to manage the portfolio content.
+![Portfolio Preview](assets/images/landing%20page.png)
+
+This project is a native PHP portfolio web application featuring simple CRUD (Create, Read, Update, Delete) functionality. The application is designed to display professional information such as profiles, skills, projects, experience, certificates, and contact details, complete with an independent content management system via an admin panel.
 
 ## Main Features
-- Public portfolio page (frontend)
-- Dark Mode and Light Mode themes
-- Admin page for editing content
-- Save and retrieve portfolio data (CRUD)
 
-## Struktur
-- index.html: main portfolio page
-- admin/: login page, dashboard, and data saving process
-- css/: dark and light styles
-- js/: frontend interactions
-- assets/: images and CV
+* **Public Portfolio Page:** A responsive frontend interface to showcase professional profiles.
+* **Theme Customization:** Full support for toggling between Dark Mode and Light Mode.
+* **Admin Panel:** An authenticated dashboard specifically for managing portfolio content.
+* **Data Management (CRUD):** Dynamic functionality to add, read, update, and delete portfolio data.
 
 ## How to Run
-1. Save the project in the htdocs folder.
-2. Start Apache from XAMPP.
-3. Open your browser to:
-   - http://localhost/web-portofolio/web-portofolio/
-4. For admin access, click the gear icon on the main page or open:
-   - http://localhost/web-portofolio/web-portofolio/admin/login.php
 
-## Notes
-- If opened through Live Server (port 5500), PHP files are not fully processed.
-- For admin/CRUD features, use Apache/XAMPP.
+Since this application relies on a PHP backend, a local web server such as XAMPP is required.
+
+1. Save or move this project folder into the `htdocs` directory of your XAMPP installation.
+2. Open the XAMPP Control Panel and start the Apache module.
+3. Open your web browser and access the public interface via:
+   `http://localhost/web-portofolio/web-portofolio/`
+4. To access the Admin management panel, click the gear icon on the main portfolio page, or access the following link directly:
+   `http://localhost/web-portofolio/web-portofolio/admin/login.php`
+
+## Important Notes
+
+* If the application is opened using extensions like Live Server in VS Code (which typically runs on port 5500), the PHP scripts will not be executed.
+* Ensure you always use an Apache environment (such as XAMPP) to test the Admin and CRUD features so the application functions as intended.
 
 ---
-
-Created for learning purposes and the development of a native PHP web portfolio application.
+*This project was developed for self-learning purposes and to practice the fundamentals of dynamic web development using native PHP.*
